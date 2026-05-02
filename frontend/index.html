@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Currículos</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/docx@9.6.1/build/index.umd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Gerador de Currículo</h1>
+      <p>Preencha os dados abaixo para gerar seu currículo em formato Word</p>
+    </header>
+
+    <div class="actions">
+      <button type="button" class="btn-sample" onclick="loadJSON()">
+        Importar JSON
+      </button>
+    </div>
+
+    <input type="file" id="jsonFileInput" accept=".json" style="display: none">
+
+    <form id="cvForm">
+      <section class="form-section">
+        <h2>Informações Pessoais</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">Nome</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Antonio">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Sobrenome</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Henrique">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="jobTitle">Cargo / Profissão</label>
+          <input type="text" id="jobTitle" name="jobTitle" placeholder="Desenvolvedor Full Stack">
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2>Contato</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="address">Endereço</label>
+            <input type="text" id="address" name="address" placeholder="Recife, PE — Brasil">
+          </div>
+          <div class="form-group">
+            <label for="phone">Telefone</label>
+            <input type="text" id="phone" name="phone" placeholder="(81) 98422-4699">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="email@exemplo.com">
+          </div>
+          <div class="form-group">
+            <label for="github">GitHub</label>
+            <input type="text" id="github" name="github" placeholder="github.com/usuario">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="linkedin">LinkedIn</label>
+          <input type="text" id="linkedin" name="linkedin" placeholder="linkedin.com/in/usuario">
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2>Perfil Profissional</h2>
+        <div class="form-group">
+          <textarea id="profile" name="profile" rows="4" placeholder="Descreva seu perfil profissional..."></textarea>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2>Tecnologias</h2>
+        <div class="form-group">
+          <textarea id="technologies" name="technologies" rows="3" placeholder="Liste suas tecnologias (uma por linha ou separadas por vírgulas)"></textarea>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2>Idiomas</h2>
+        <div id="languagesContainer">
+          <div class="language-entry">
+            <input type="text" class="lang-name" placeholder="Idioma (ex: Inglês)">
+            <input type="text" class="lang-level" placeholder="Nível (ex: Avançado)">
+            <button type="button" class="btn-remove" onclick="removeEntry(this)">✕</button>
+          </div>
+        </div>
+        <button type="button" class="btn-add" onclick="addLanguage()">+ Adicionar Idioma</button>
+      </section>
+
+      <section class="form-section">
+        <h2>Competências / Soft Skills</h2>
+        <div class="form-group">
+          <textarea id="skills" name="skills" rows="3" placeholder="Liste suas competências (uma por linha)"></textarea>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2>Formação Acadêmica</h2>
+        <div id="educationContainer">
+          <div class="education-entry">
+            <input type="text" class="edu-course" placeholder="Curso">
+            <input type="text" class="edu-institution" placeholder="Instituição">
+            <input type="text" class="edu-period" placeholder="Período (ex: 2023 – 2025)">
+            <button type="button" class="btn-remove" onclick="removeEntry(this)">✕</button>
+          </div>
+        </div>
+        <button type="button" class="btn-add" onclick="addEducation()">+ Adicionar Formação</button>
+      </section>
+
+      <section class="form-section">
+        <h2>Experiência Profissional</h2>
+        <div id="experienceContainer">
+          <div class="experience-entry">
+            <input type="text" class="exp-role" placeholder="Cargo">
+            <input type="text" class="exp-company" placeholder="Empresa">
+            <div class="form-row">
+              <input type="text" class="exp-period" placeholder="Período (ex: Jan 2023 – Presente)">
+              <input type="text" class="exp-location" placeholder="Local (ex: Recife, PE)">
+            </div>
+            <textarea class="exp-description" rows="3" placeholder="Liste suas atividades e realizações (uma por linha)"></textarea>
+            <button type="button" class="btn-remove" onclick="removeEntry(this)">✕ Remover</button>
+          </div>
+        </div>
+        <button type="button" class="btn-add" onclick="addExperience()">+ Adicionar Experiência</button>
+      </section>
+
+      <section class="form-section">
+        <h2>Projetos</h2>
+        <div id="projectsContainer">
+          <div class="project-entry">
+            <input type="text" class="proj-name" placeholder="Nome do Projeto">
+            <input type="text" class="proj-url" placeholder="URL (opcional)">
+            <textarea class="proj-description" rows="2" placeholder="Descrição do projeto"></textarea>
+            <input type="text" class="proj-stack" placeholder="Stack/Tecnologias">
+            <button type="button" class="btn-remove" onclick="removeEntry(this)">✕ Remover</button>
+          </div>
+        </div>
+        <button type="button" class="btn-add" onclick="addProject()">+ Adicionar Projeto</button>
+      </section>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-generate">Gerar Currículo DOCX</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

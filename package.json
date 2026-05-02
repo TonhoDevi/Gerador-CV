@@ -1,4 +1,5 @@
 {
+  "name": "gerador-de-curriculos",
   "dependencies": {
     "docx": "^9.6.1"
   }
