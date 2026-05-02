@@ -267,11 +267,24 @@ function populateForm(data) {
   (data.languages || []).forEach(lang => {
     const entry = document.createElement('div');
     entry.className = 'language-entry';
-    entry.innerHTML = `
-      <input type="text" class="lang-name" value="${lang.name || ''}" placeholder="Idioma">
-      <input type="text" class="lang-level" value="${lang.level || ''}" placeholder="Nível">
-      <button type="button" class="btn-remove" onclick="removeEntry(this)">✕</button>
-    `;
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.className = 'lang-name';
+    nameInput.placeholder = 'Idioma';
+    nameInput.value = lang.name || '';
+    const levelInput = document.createElement('input');
+    levelInput.type = 'text';
+    levelInput.className = 'lang-level';
+    levelInput.placeholder = 'Nível';
+    levelInput.value = lang.level || '';
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'btn-remove';
+    removeBtn.textContent = '✕';
+    removeBtn.onclick = function() { removeEntry(this); };
+    entry.appendChild(nameInput);
+    entry.appendChild(levelInput);
+    entry.appendChild(removeBtn);
     langContainer.appendChild(entry);
   });
   if (langContainer.children.length === 0) {
@@ -285,12 +298,30 @@ function populateForm(data) {
   (data.education || []).forEach(edu => {
     const entry = document.createElement('div');
     entry.className = 'education-entry';
-    entry.innerHTML = `
-      <input type="text" class="edu-course" value="${edu.course || ''}" placeholder="Curso">
-      <input type="text" class="edu-institution" value="${edu.institution || ''}" placeholder="Instituição">
-      <input type="text" class="edu-period" value="${edu.period || ''}" placeholder="Período">
-      <button type="button" class="btn-remove" onclick="removeEntry(this)">✕</button>
-    `;
+    const courseInput = document.createElement('input');
+    courseInput.type = 'text';
+    courseInput.className = 'edu-course';
+    courseInput.placeholder = 'Curso';
+    courseInput.value = edu.course || '';
+    const instInput = document.createElement('input');
+    instInput.type = 'text';
+    instInput.className = 'edu-institution';
+    instInput.placeholder = 'Instituição';
+    instInput.value = edu.institution || '';
+    const periodInput = document.createElement('input');
+    periodInput.type = 'text';
+    periodInput.className = 'edu-period';
+    periodInput.placeholder = 'Período';
+    periodInput.value = edu.period || '';
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'btn-remove';
+    removeBtn.textContent = '✕';
+    removeBtn.onclick = function() { removeEntry(this); };
+    entry.appendChild(courseInput);
+    entry.appendChild(instInput);
+    entry.appendChild(periodInput);
+    entry.appendChild(removeBtn);
     eduContainer.appendChild(entry);
   });
   if (eduContainer.children.length === 0) {
@@ -302,16 +333,44 @@ function populateForm(data) {
   (data.experiences || []).forEach(exp => {
     const entry = document.createElement('div');
     entry.className = 'experience-entry';
-    entry.innerHTML = `
-      <input type="text" class="exp-role" value="${exp.role || ''}" placeholder="Cargo">
-      <input type="text" class="exp-company" value="${exp.company || ''}" placeholder="Empresa">
-      <div class="form-row">
-        <input type="text" class="exp-period" value="${exp.period || ''}" placeholder="Período">
-        <input type="text" class="exp-location" value="${exp.location || ''}" placeholder="Local">
-      </div>
-      <textarea class="exp-description" rows="3">${exp.description || ''}</textarea>
-      <button type="button" class="btn-remove" onclick="removeEntry(this)">✕ Remover</button>
-    `;
+    const roleInput = document.createElement('input');
+    roleInput.type = 'text';
+    roleInput.className = 'exp-role';
+    roleInput.placeholder = 'Cargo';
+    roleInput.value = exp.role || '';
+    const companyInput = document.createElement('input');
+    companyInput.type = 'text';
+    companyInput.className = 'exp-company';
+    companyInput.placeholder = 'Empresa';
+    companyInput.value = exp.company || '';
+    const formRow = document.createElement('div');
+    formRow.className = 'form-row';
+    const periodInput = document.createElement('input');
+    periodInput.type = 'text';
+    periodInput.className = 'exp-period';
+    periodInput.placeholder = 'Período';
+    periodInput.value = exp.period || '';
+    const locationInput = document.createElement('input');
+    locationInput.type = 'text';
+    locationInput.className = 'exp-location';
+    locationInput.placeholder = 'Local';
+    locationInput.value = exp.location || '';
+    formRow.appendChild(periodInput);
+    formRow.appendChild(locationInput);
+    const descTextarea = document.createElement('textarea');
+    descTextarea.className = 'exp-description';
+    descTextarea.rows = 3;
+    descTextarea.value = exp.description || '';
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'btn-remove';
+    removeBtn.textContent = '✕ Remover';
+    removeBtn.onclick = function() { removeEntry(this); };
+    entry.appendChild(roleInput);
+    entry.appendChild(companyInput);
+    entry.appendChild(formRow);
+    entry.appendChild(descTextarea);
+    entry.appendChild(removeBtn);
     expContainer.appendChild(entry);
   });
   if (expContainer.children.length === 0) {
@@ -323,13 +382,35 @@ function populateForm(data) {
   (data.projects || []).forEach(proj => {
     const entry = document.createElement('div');
     entry.className = 'project-entry';
-    entry.innerHTML = `
-      <input type="text" class="proj-name" value="${proj.name || ''}" placeholder="Nome do Projeto">
-      <input type="text" class="proj-url" value="${proj.url || ''}" placeholder="URL (opcional)">
-      <textarea class="proj-description" rows="2">${proj.description || ''}</textarea>
-      <input type="text" class="proj-stack" value="${proj.stack || ''}" placeholder="Stack/Tecnologias">
-      <button type="button" class="btn-remove" onclick="removeEntry(this)">✕ Remover</button>
-    `;
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.className = 'proj-name';
+    nameInput.placeholder = 'Nome do Projeto';
+    nameInput.value = proj.name || '';
+    const urlInput = document.createElement('input');
+    urlInput.type = 'text';
+    urlInput.className = 'proj-url';
+    urlInput.placeholder = 'URL (opcional)';
+    urlInput.value = proj.url || '';
+    const descTextarea = document.createElement('textarea');
+    descTextarea.className = 'proj-description';
+    descTextarea.rows = 2;
+    descTextarea.value = proj.description || '';
+    const stackInput = document.createElement('input');
+    stackInput.type = 'text';
+    stackInput.className = 'proj-stack';
+    stackInput.placeholder = 'Stack/Tecnologias';
+    stackInput.value = proj.stack || '';
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'btn-remove';
+    removeBtn.textContent = '✕ Remover';
+    removeBtn.onclick = function() { removeEntry(this); };
+    entry.appendChild(nameInput);
+    entry.appendChild(urlInput);
+    entry.appendChild(descTextarea);
+    entry.appendChild(stackInput);
+    entry.appendChild(removeBtn);
     projContainer.appendChild(entry);
   });
   if (projContainer.children.length === 0) {
@@ -348,12 +429,19 @@ document.getElementById('jsonFileInput').addEventListener('change', function(e) 
   const reader = new FileReader();
   reader.onload = function(event) {
     try {
-      const data = JSON.parse(event.target.result);
+      const text = event.target.result;
+      const data = JSON.parse(text);
+      console.log('JSON carregado:', data);
       populateForm(data);
       alert('JSON importado com sucesso!');
     } catch (err) {
-      alert('Erro ao ler JSON. Verifique o formato.');
+      console.error('Erro ao parsear JSON:', err);
+      alert('Erro ao ler JSON: ' + err.message);
     }
+  };
+  reader.onerror = function() {
+    console.error('Erro ao ler arquivo:', reader.error);
+    alert('Erro ao ler arquivo.');
   };
   reader.readAsText(file);
   this.value = '';

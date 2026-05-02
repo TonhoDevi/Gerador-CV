@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gerador de Currículos</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://unpkg.com/docx@9.6.1/build/index.umd.js"></script>
+  <script src="https://unpkg.com/docx@9.6.1/dist/index.iife.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 </head>
 <body>
@@ -29,16 +29,16 @@
         <div class="form-row">
           <div class="form-group">
             <label for="firstName">Nome</label>
-            <input type="text" id="firstName" name="firstName" placeholder="Antonio">
+            <input type="text" id="firstName" name="firstName" placeholder="Nome">
           </div>
           <div class="form-group">
             <label for="lastName">Sobrenome</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Henrique">
+            <input type="text" id="lastName" name="lastName" placeholder="Sobrenome">
           </div>
         </div>
         <div class="form-group">
           <label for="jobTitle">Cargo / Profissão</label>
-          <input type="text" id="jobTitle" name="jobTitle" placeholder="Desenvolvedor Full Stack">
+          <input type="text" id="jobTitle" name="jobTitle" placeholder="Titulo do Cargo ou Profissão">
         </div>
       </section>
 
@@ -47,11 +47,11 @@
         <div class="form-row">
           <div class="form-group">
             <label for="address">Endereço</label>
-            <input type="text" id="address" name="address" placeholder="Recife, PE — Brasil">
+            <input type="text" id="address" name="address" placeholder="Rua Exemplo, 123 - Bairro - Cidade, Estado">
           </div>
           <div class="form-group">
             <label for="phone">Telefone</label>
-            <input type="text" id="phone" name="phone" placeholder="(81) 98422-4699">
+            <input type="text" id="phone" name="phone" placeholder="(XX) XXXXX-XXXX">
           </div>
         </div>
         <div class="form-row">
